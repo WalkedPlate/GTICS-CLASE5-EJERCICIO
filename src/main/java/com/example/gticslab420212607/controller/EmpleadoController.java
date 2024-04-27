@@ -89,8 +89,18 @@ public class EmpleadoController {
     }
 
     @GetMapping(value="/empleados/nuevo")
-    public String nuevo(){
-        return "Empleados/nuevo";
+    public String nuevo(Model model){
+
+        List<Departments> listaDep = departmentsRepository.findAll();
+        List<Employees> listaJefes = employeesRepository.findAll();
+        List<Jobs> listaJobs = jobsRepository.findAll();
+
+
+        model.addAttribute("listaJefes",listaJefes);
+        model.addAttribute("listaJobs",listaJobs);
+        model.addAttribute("listaDep",listaDep);
+
+        return "Empleados/new";
     }
 
 
