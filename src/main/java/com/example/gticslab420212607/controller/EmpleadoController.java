@@ -95,10 +95,15 @@ public class EmpleadoController {
 
 
     @PostMapping(value = "empleados/guardar")
-    public String guardarEmpleado(Employees employees, @RequestParam("idDep") Integer idDep, @RequestParam("idJob") String idJob){
+    public String guardarEmpleado(Employees employees, @RequestParam("idDep") Integer idDep, @RequestParam("idJob") String idJob,@RequestParam("idManager") Integer idManager){
+
+        System.out.println(idDep);
+        System.out.println(idJob);
 
         employees.setJobs(jobsRepository.findById(idJob).get());
         employees.setDepartments(departmentsRepository.findById(idDep).get());
+        employees.setManager(employeesRepository.findById(idManager).get());
+        employees.setHireDate("1990-01-03 00:00:00");
 
         employeesRepository.save(employees);
         return "redirect:/empleados";
